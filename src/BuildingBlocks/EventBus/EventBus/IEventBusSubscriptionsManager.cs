@@ -26,7 +26,7 @@ namespace EventBus
         void RemoveDynamicSubscription<TH>(string eventName)
             where TH : IDynamicIntegrationEventHandler;
 
-        bool HasSubscriptionsForEvent<T>() where T : IIntegrationEvent;
+        bool HasSubscriptionsForEvent<T>() where T : IntegrationEvent;
         bool HasSubscriptionsForEvent(string eventName);
         Type GetEventTypeByName(string eventName);
         void Clear();
