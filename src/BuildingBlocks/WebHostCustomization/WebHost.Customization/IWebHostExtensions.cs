@@ -68,6 +68,8 @@ namespace WebHost.Customization
                     }
                 }
             }
+
+            return webost;
         }
 
         private static void InvokeSeeder<TContext>(

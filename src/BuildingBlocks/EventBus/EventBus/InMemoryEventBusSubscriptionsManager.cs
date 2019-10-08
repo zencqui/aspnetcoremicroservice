@@ -129,7 +129,7 @@ namespace EventBus
         public Type GetEventTypeByName(string eventName) => _eventTypes.SingleOrDefault(x => x.Name == eventName);
 
         public bool HasSubscriptionsForEvent<T>() 
-            where T : IIntegrationEvent
+            where T : IntegrationEvent
         {
             var key = GetEventKey<T>();
             return HasSubscriptionsForEvent(key);
