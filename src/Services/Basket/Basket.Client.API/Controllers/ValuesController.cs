@@ -4,24 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Catalog.Clientt.API.Controllers
+namespace Basket.Client.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly IClientRaiseIntegrationEventService _clientRaiseIntegrationEventService;
-
-        public ValuesController(IClientRaiseIntegrationEventService clientRaiseIntegrationEventService)
-        {
-            _clientRaiseIntegrationEventService = clientRaiseIntegrationEventService;
-        }
-
         // GET api/values
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<string>>> Get()
+        public ActionResult<IEnumerable<string>> Get()
         {
-            await _clientRaiseIntegrationEventService.PublishThroughEventBusAsync(new ClientMessageIntegrationEvent("Message from Catalog client."));
             return new string[] { "value1", "value2" };
         }
 
