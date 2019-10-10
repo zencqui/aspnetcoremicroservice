@@ -14,8 +14,6 @@ namespace Catalog.Clientt.API
     {
         public static IServiceCollection AddIntegrationServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IClientRaiseIntegrationEventService, ClientRaiseIntegrationEventService>();
-
             services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
             {
                 var logger = sp.GetRequiredService<ILogger<DefaultRabbitMQPersistentConnection>>();
@@ -104,7 +102,9 @@ namespace Catalog.Clientt.API
             });
 
             services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
-
+            services.AddTransient<IClientRaiseIntegrationEventService, ClientRaiseIntegrationEventService>();
+            services.AddTransient<BasketChangedIntegrationEventHandler>();
+            
             return services;
         }
     }

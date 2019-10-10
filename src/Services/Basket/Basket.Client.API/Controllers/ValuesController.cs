@@ -10,6 +10,14 @@ namespace Basket.Client.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IBasketChangedIntegrationEventService _basketChangedIntegrationEventService;
+
+        public ValuesController(IBasketChangedIntegrationEventService basketChangedIntegrationEventService)
+        {
+            _basketChangedIntegrationEventService = basketChangedIntegrationEventService 
+                                                    ?? throw new ArgumentException(nameof(basketChangedIntegrationEventService));
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -19,8 +27,10 @@ namespace Basket.Client.API.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<ActionResult<string>> Get(int id)
         {
+            await _basketChangedIntegrationEventService.PublishThroughEventBusAsync(
+                new BasketChangedIntegrationEvent("Message from Basket client."));
             return "value";
         }
 

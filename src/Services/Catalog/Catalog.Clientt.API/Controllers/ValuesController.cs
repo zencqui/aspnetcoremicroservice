@@ -19,16 +19,16 @@ namespace Catalog.Clientt.API.Controllers
 
         // GET api/values
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<string>>> Get()
+        public ActionResult<IEnumerable<string>> Get()
         {
-            await _clientRaiseIntegrationEventService.PublishThroughEventBusAsync(new ClientMessageIntegrationEvent("Message from Catalog client."));
             return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<ActionResult<string>> Get(int id)
         {
+            await _clientRaiseIntegrationEventService.PublishThroughEventBusAsync(new ClientMessageIntegrationEvent("Message from Catalog client."));
             return "value";
         }
 
