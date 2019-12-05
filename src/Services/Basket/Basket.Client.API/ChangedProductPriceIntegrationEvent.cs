@@ -2,9 +2,9 @@
 
 namespace Basket.Client.API
 {
-    public class ClientMessageIntegrationEvent : IntegrationEvent
+    public class ChangedProductPriceIntegrationEvent : IntegrationEvent
     {
-        public ClientMessageIntegrationEvent(string message)
+        public ChangedProductPriceIntegrationEvent(string message)
         {
             Message = message;
 

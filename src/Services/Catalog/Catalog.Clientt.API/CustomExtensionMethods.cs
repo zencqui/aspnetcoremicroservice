@@ -18,10 +18,14 @@ namespace Catalog.Clientt.API
             {
                 var logger = sp.GetRequiredService<ILogger<DefaultRabbitMQPersistentConnection>>();
 
+                var rabbitConnectionUrl = configuration["EventBusConnection"];
+                rabbitConnectionUrl = rabbitConnectionUrl.Replace("amqp://", "amqps://");
+
                 var factory = new ConnectionFactory()
                 {
-                    HostName = configuration["EventBusConnection"],
+                    //HostName = configuration["EventBusConnection"],
                     DispatchConsumersAsync = true,
+                    Uri = new Uri(rabbitConnectionUrl),
                 };
 
                 if (!string.IsNullOrEmpty(configuration["EventBusUserName"]))
@@ -103,7 +107,7 @@ namespace Catalog.Clientt.API
 
             services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
             services.AddTransient<IClientRaiseIntegrationEventService, ClientRaiseIntegrationEventService>();
-            services.AddTransient<BasketChangedIntegrationEventHandler>();
+            //services.AddTransient<BasketChangedIntegrationEventHandler>();
             
             return services;
         }

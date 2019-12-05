@@ -25,10 +25,10 @@ namespace Catalog.Clientt.API.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<string>> Get(int id)
+        [HttpGet("{productPrice}")]
+        public async Task<ActionResult<string>> ChangeProductPrice(double productPrice)
         {
-            await _clientRaiseIntegrationEventService.PublishThroughEventBusAsync(new ClientMessageIntegrationEvent("Message from Catalog client."));
+            await _clientRaiseIntegrationEventService.PublishThroughEventBusAsync(new ChangedProductPriceIntegrationEvent($"A product price has been changed: {productPrice}"));
             return "value";
         }
 

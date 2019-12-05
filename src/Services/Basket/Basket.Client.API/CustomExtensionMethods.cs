@@ -17,11 +17,14 @@ namespace Basket.Client.API
             services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
             {
                 var logger = sp.GetRequiredService<ILogger<DefaultRabbitMQPersistentConnection>>();
+                var rabbitConnectionUrl = configuration["EventBusConnection"];
+                rabbitConnectionUrl = rabbitConnectionUrl.Replace("amqp://", "amqps://");
 
                 var factory = new ConnectionFactory()
                 {
-                    HostName = configuration["EventBusConnection"],
+                    //HostName = configuration["EventBusConnection"],
                     DispatchConsumersAsync = true,
+                    Uri = new Uri(rabbitConnectionUrl),
                 };
 
                 if (!string.IsNullOrEmpty(configuration["EventBusUserName"]))
@@ -74,8 +77,8 @@ namespace Basket.Client.API
 
             services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
             
-            services.AddTransient<IBasketChangedIntegrationEventService, BasketChangedIntegrationEventService>();
-            services.AddTransient<ClientMessageIntegrationEventHandler>();
+            //services.AddTransient<IBasketChangedIntegrationEventService, BasketChangedIntegrationEventService>();
+            services.AddTransient<ChangedProductPriceIntegrationEventHandler>();
 
             return services;
         }

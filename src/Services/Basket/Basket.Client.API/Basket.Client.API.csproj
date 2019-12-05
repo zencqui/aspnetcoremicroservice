@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BasketChangedIntegrationEvent.cs" />
+    <Compile Remove="BasketChangedIntegrationEventService.cs" />
+    <Compile Remove="IBasketChangedIntegrationEventService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="4.6.2" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
