@@ -4,17 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Catalog.Client.API.Controllers
+namespace UserProfile.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
         private readonly IRaiseIntegrationEventService _raiseIntegrationEventService;
+        private static int _count;
 
         public ValuesController(IRaiseIntegrationEventService raiseIntegrationEventService)
         {
             _raiseIntegrationEventService = raiseIntegrationEventService;
+            //_count = 0;
         }
 
         // GET api/values
@@ -24,14 +26,11 @@ namespace Catalog.Client.API.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        [HttpGet("{productPrice}")]
-        public async Task<ActionResult<string>> ChangeProductPrice(double productPrice)
+        // GET api/values/angeles city
+        [HttpGet("{newAddress}")]
+        public async Task<ActionResult<string>> UserAddressChanged(string newAddress)
         {
-            var rand = new Random();
-            var newPrice = productPrice * rand.Next(1, 100);
-
-            await _raiseIntegrationEventService.PublishThroughEventBusAsync(new ChangedProductPriceIntegrationEvent($"A product price has been changed: {newPrice}"));
+            await _raiseIntegrationEventService.PublishThroughEventBusAsync(new UserAddressChangedIntegrationEvent($"User address has been changed: {newAddress}_{_count++}"));
             return "value";
         }
 

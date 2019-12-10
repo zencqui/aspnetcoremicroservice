@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 
-namespace Basket.Client.API
+namespace Ordering.API
 {
     public static class CustomExtensionMethods
     {
@@ -17,6 +17,7 @@ namespace Basket.Client.API
             services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
             {
                 var logger = sp.GetRequiredService<ILogger<DefaultRabbitMQPersistentConnection>>();
+
                 var rabbitConnectionUrl = configuration["EventBusConnection"];
                 rabbitConnectionUrl = rabbitConnectionUrl.Replace("amqp://", "amqps://");
 
@@ -49,6 +50,35 @@ namespace Basket.Client.API
             return services;
         }
 
+        private static IRabbitMQPersistentConnection BuildRabbitMq(IServiceProvider services, IConfiguration configuration)
+        {
+            var logger = services.GetRequiredService<ILogger<DefaultRabbitMQPersistentConnection>>();
+
+            var factory = new ConnectionFactory()
+            {
+                HostName = configuration["EventBusConnection"],
+                DispatchConsumersAsync = true,
+            };
+
+            if (!string.IsNullOrEmpty(configuration["EventBusUserName"]))
+            {
+                factory.UserName = configuration["EventBusUserName"];
+            }
+
+            if (!string.IsNullOrEmpty(configuration["EventBusPassword"]))
+            {
+                factory.Password = configuration["EventBusPassword"];
+            }
+
+            var retryCount = 5;
+            if (!string.IsNullOrEmpty(configuration["EventBusRetryCount"]))
+            {
+                retryCount = int.Parse(configuration["EventBusRetryCount"]);
+            }
+
+            return new DefaultRabbitMQPersistentConnection(factory, logger, retryCount);
+        }
+
         public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
             var subscriptionClientName = configuration["SubscriptionClientName"];
@@ -76,9 +106,6 @@ namespace Basket.Client.API
             });
 
             services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
-            
-            //services.AddTransient<IBasketChangedIntegrationEventService, BasketChangedIntegrationEventService>();
-            services.AddTransient<ChangedProductPriceIntegrationEventHandler>();
             services.AddTransient<UserAddressChangedIntegrationEventHandler>();
 
             return services;

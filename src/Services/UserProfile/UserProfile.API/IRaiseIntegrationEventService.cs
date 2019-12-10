@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using EventBus.Events;
 
-namespace Catalog.Client.API
+namespace UserProfile.API
 {
-    public interface IClientRaiseIntegrationEventService
+    public interface IRaiseIntegrationEventService
     {
         Task PublishThroughEventBusAsync(IntegrationEvent evt);
     }

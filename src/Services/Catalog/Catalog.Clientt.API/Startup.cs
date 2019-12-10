@@ -31,7 +31,7 @@ namespace Catalog.Client.API
             services.AddIntegrationServices(Configuration)
                 .AddEventBus(Configuration)
                 .AddMvc(options => options.EnableEndpointRouting = false)
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             var container = new ContainerBuilder();
             container.Populate(services);
@@ -54,7 +54,7 @@ namespace Catalog.Client.API
             app.UseHttpsRedirection();
             app.UseMvc();
 
-            ConfigureEventBus(app);
+            //ConfigureEventBus(app);
         }
 
         private void ConfigureEventBus(IApplicationBuilder app)

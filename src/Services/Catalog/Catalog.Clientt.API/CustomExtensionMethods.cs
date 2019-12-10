@@ -106,7 +106,7 @@ namespace Catalog.Client.API
             });
 
             services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
-            services.AddTransient<IClientRaiseIntegrationEventService, ClientRaiseIntegrationEventService>();
+            services.AddTransient<IRaiseIntegrationEventService, RaiseIntegrationEventService>();
             //services.AddTransient<BasketChangedIntegrationEventHandler>();
             
             return services;

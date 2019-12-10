@@ -5,11 +5,11 @@ using EventBus.Events;
 
 namespace Catalog.Client.API
 {
-    public class ClientRaiseIntegrationEventService : IClientRaiseIntegrationEventService
+    public class RaiseIntegrationEventService : IRaiseIntegrationEventService
     {
         private readonly IEventBus _eventBus;
 
-        public ClientRaiseIntegrationEventService(IEventBus eventBus)
+        public RaiseIntegrationEventService(IEventBus eventBus)
         {
             _eventBus = eventBus ?? throw new ArgumentException(nameof(eventBus));
         }
