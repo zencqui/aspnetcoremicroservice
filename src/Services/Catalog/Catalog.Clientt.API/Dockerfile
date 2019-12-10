@@ -8,16 +8,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-nanoserver-1809 AS build
 WORKDIR /src
-COPY ["src/Services/Catalog/Catalog.Clientt.API/Catalog.Clientt.API.csproj", "src/Services/Catalog/Catalog.Clientt.API/"]
-RUN dotnet restore "src/Services/Catalog/Catalog.Clientt.API/Catalog.Clientt.API.csproj"
+COPY ["src/Services/Catalog/Catalog.Client.API/Catalog.Clientt.API.csproj", "src/Services/Catalog/Catalog.Clientt.API/"]
+RUN dotnet restore "src/Services/Catalog/Catalog.Client.API/Catalog.Clientt.API.csproj"
 COPY . .
-WORKDIR "/src/src/Services/Catalog/Catalog.Clientt.API"
-RUN dotnet build "Catalog.Clientt.API.csproj" -c Release -o /app/build
+WORKDIR "/src/src/Services/Catalog/Catalog.Client.API"
+RUN dotnet build "Catalog.Client.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Catalog.Clientt.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "Catalog.Client.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Catalog.Clientt.API.dll"]
+ENTRYPOINT ["dotnet", "Catalog.Client.API.dll"]

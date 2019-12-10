@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Catalog.Clientt.API
+namespace Catalog.Client.API
 {
     public class Startup
     {
@@ -30,7 +30,7 @@ namespace Catalog.Clientt.API
         {
             services.AddIntegrationServices(Configuration)
                 .AddEventBus(Configuration)
-                .AddMvc()
+                .AddMvc(options => options.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var container = new ContainerBuilder();

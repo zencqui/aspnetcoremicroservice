@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <UserSecretsId>501cee1f-2a0c-46cb-87ce-7927b95de15c</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>

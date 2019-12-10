@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EventBus.Events;
 
-namespace Catalog.Clientt.API
+namespace Catalog.Client.API
 {
     public interface IClientRaiseIntegrationEventService
     {

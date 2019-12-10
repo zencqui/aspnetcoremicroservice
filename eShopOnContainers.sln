@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandBus", "src\BuildingB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBusServiceBus", "src\BuildingBlocks\EventBus\EventBusServiceBus\EventBusServiceBus.csproj", "{BB9B43FD-AFFA-4807-9463-4D7DD02972D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Clientt.API", "src\Services\Catalog\Catalog.Clientt.API\Catalog.Clientt.API.csproj", "{C6B98BD7-B350-4985-B543-4675535018A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Client.API", "src\Services\Catalog\Catalog.Clientt.API\Catalog.Client.API.csproj", "{C6B98BD7-B350-4985-B543-4675535018A8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Client.API", "src\Services\Basket\Basket.Client.API\Basket.Client.API.csproj", "{02CB245D-B243-4FE6-8593-747686E5E677}"
 EndProject

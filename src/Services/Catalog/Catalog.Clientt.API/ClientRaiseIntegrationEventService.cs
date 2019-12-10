@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using EventBus.Abstractions;
 using EventBus.Events;
 
-namespace Catalog.Clientt.API
+namespace Catalog.Client.API
 {
     public class ClientRaiseIntegrationEventService : IClientRaiseIntegrationEventService
     {

@@ -30,7 +30,7 @@ namespace Basket.Client.API
         {
             services.AddIntegrationServices(Configuration)
                 .AddEventBus(Configuration)
-                .AddMvc()
+                .AddMvc(options => options.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var container = new ContainerBuilder();

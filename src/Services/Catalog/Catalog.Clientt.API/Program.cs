@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 
-namespace Catalog.Clientt.API
+namespace Catalog.Client.API
 {
     public static class Program
     {
